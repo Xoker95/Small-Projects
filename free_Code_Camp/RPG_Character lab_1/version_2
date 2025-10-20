@@ -1,0 +1,32 @@
+full_dot = '●'
+empty_dot = '○'
+
+def create_character(character_name, STR, INT, CHA):
+    if not isinstance(character_name, str):
+        return "The character name should be a string"
+    if len(character_name) > 10:
+        return "The character name is too long"
+    if " " in character_name:
+        return "The character name should not contain spaces"
+
+    stats = [STR, INT, CHA]
+    stats1 = ["STR", "INT", "CHA"]
+
+    for stat in stats:
+        if not isinstance(stat, int):
+            return "All stats should be integers"
+        if stat < 1:
+            return "All stats should be no less than 1"
+        if stat > 4:
+            return "All stats should be no more than 4"
+
+    if sum(stats) != 7:
+        return "The character should start with 7 points"
+
+    print(character_name)
+    # zip wird hier verwendet, weil ich range und stats gleichzeitig brauche,
+    # und nicht einer nach dem anderen, gebe zu viele Ergebnisse dann.
+    for stat, i in zip(stats, range(3)):
+        print(stats1[i], " ", (stat * full_dot) + ((10 - stat) * empty_dot))
+
+create_character("ren", 3, 3, 1)
